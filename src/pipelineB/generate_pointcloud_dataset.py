@@ -113,12 +113,38 @@ if __name__ == "__main__":
     # parser.add_argument("--max_frames", type=int, default=100, help="Limit number of images processed (for dev)")
     # args = parser.parse_args()
     # scene_path = "data/mit_76_459/76-459b"
-    scene_path = "data/mit_76_studyroom/76-1studyroom2"
+    #scene_path = "data/mit_76_studyroom/76-1studyroom2"
     # scene_path = "data/mit_gym_z_squash/gym_z_squash_scan1_oct_26_2012_erika"
     # scene_path = "data/mit_32_d507/d507_2"
     # scene_path = "data/mit_lab_hj/lab_hj_tea_nov_2_2012_scan1_erika"
-    output_path = "data/pointclouds"
-    max_frames = 150
+    # output_path = "data/pointclouds/test"
+    # max_frames = 150
+
+
+    base_path = "data"
+    output_path = "data/pointclouds/test"
+    max_frames = 200
+
+    # Loop only over folders starting with 'harvard'
+    for main_folder in os.listdir(base_path):
+        if not main_folder.startswith("harvard"):
+            continue
+
+        main_path = os.path.join(base_path, main_folder)
+        if not os.path.isdir(main_path):
+            continue
+
+        # Look for a single subfolder inside (e.g., hv_c6_1 inside harvard_c6)
+        subfolders = [f for f in os.listdir(main_path) if os.path.isdir(os.path.join(main_path, f))]
+        if len(subfolders) != 1:
+            print(f" Skipping {main_path} — expected 1 subfolder, found: {len(subfolders)}")
+            continue
+
+        # Build scene path and apply process
+        scene_folder = os.path.join(main_path, subfolders[0])
+        print(f"\n🔁 Processing: {scene_folder}")
+        process_scene(scene_folder, output_path, max_frames)
+
 
     # process_scene(args.scene, args.out, args.max_frames)
-    process_scene(scene_path, output_path, max_frames)
+    # process_scene(scene_path, output_path, max_frames)

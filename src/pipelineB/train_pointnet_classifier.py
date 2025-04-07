@@ -9,8 +9,8 @@ from pointnet_model import PointNetPlusPlus
 from pointnet_dataset import PointCloudTableDataset
 
 # Helper function to plot training curves
-def plot_training_curves(train_vals, val_vals, ylabel, title, filename):
-    os.makedirs("figures/results", exist_ok=True)
+def plot_training_curves(train_vals, val_vals, ylabel, title, filename, batch_size):
+    os.makedirs(f"figures/results/batch_{batch_size}", exist_ok=True)
     plt.figure(figsize=(8, 5))
     plt.plot(train_vals, label="Train")
     plt.plot(val_vals, label="Val")
@@ -20,12 +20,12 @@ def plot_training_curves(train_vals, val_vals, ylabel, title, filename):
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig(os.path.join("figures/results", filename))
+    plt.savefig(os.path.join(f"figures/results/batch_{batch_size}", filename))
     plt.close()
 
 def train_pointnet_classifier(
     data_dir,
-    batch_size=8,
+    batch_size=64,
     epochs=50,
     lr=1e-3,
     num_points=1024,
@@ -45,9 +45,9 @@ def train_pointnet_classifier(
     val_loader   = DataLoader(val_ds, batch_size=batch_size, shuffle=False)
 
     # Model
-    model = PointNetPlusPlus(num_classes=2).to(device)      # 2 classes: table or no table
-    optimizer = optim.Adam(model.parameters(), lr=lr)       # Adam optimizer
-    criterion = nn.CrossEntropyLoss()
+    model =      PointNetPlusPlus(num_classes=2).to(device)      # 2 classes: table or no table
+    optimizer =  optim.Adam(model.parameters(), lr=lr)           # Adam optimizer
+    criterion =  nn.CrossEntropyLoss()
 
     best_acc = 0.0
     train_losses = []
@@ -144,10 +144,10 @@ def train_pointnet_classifier(
             print(f"✅ Saved new best model to {save_path}")
 
     # Plot all training curves using the helper function
-    plot_training_curves(train_accuracies, val_accuracies, "Accuracy", "Accuracy over Epochs", "accuracy_plot.png")
-    plot_training_curves(train_losses, val_losses, "Loss", "Loss over Epochs", "loss_plot.png")
-    plot_training_curves(train_precisions, val_precisions, "Precision", "Precision over Epochs", "precision_plot.png")
-    plot_training_curves(train_recalls, val_recalls, "Recall", "Recall over Epochs", "recall_plot.png")
+    plot_training_curves(train_accuracies, val_accuracies, "Accuracy", "Accuracy over Epochs", "accuracy_plot.png", batch_size)
+    plot_training_curves(train_losses, val_losses, "Loss", "Loss over Epochs", "loss_plot.png", batch_size)
+    plot_training_curves(train_precisions, val_precisions, "Precision", "Precision over Epochs", "precision_plot.png", batch_size)
+    plot_training_curves(train_recalls, val_recalls, "Recall", "Recall over Epochs", "recall_plot.png", batch_size)
 
     print(f"Training complete. Best Val Acc: {best_acc:.2%}")
 
