@@ -156,7 +156,7 @@ def convert_depth_maps_to_pointclouds(depth_dir, pc_output_dir, base_data_dir="d
 
 def main():
     depth_dir = "data/depth_maps"
-    pc_output_dir = "data/pointclouds"
+    pc_output_dir = "data/pointclouds/train"
     base_data_dir = "data"
 
     convert_depth_maps_to_pointclouds(depth_dir, pc_output_dir, base_data_dir)

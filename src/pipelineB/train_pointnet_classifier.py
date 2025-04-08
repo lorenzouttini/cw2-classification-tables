@@ -25,7 +25,7 @@ def plot_training_curves(train_vals, val_vals, ylabel, title, filename, batch_si
 
 def train_pointnet_classifier(
     data_dir,
-    batch_size=16,
+    batch_size=32,
     epochs=50,
     lr=1e-3,
     num_points=1024,
@@ -36,13 +36,14 @@ def train_pointnet_classifier(
 
     # Dataset 
     dataset = PointCloudTableDataset(data_dir, num_points=num_points)
+    print(f"🔢 Total samples: {len(dataset)}")
     val_size = int(len(dataset) * val_split)                            # 20% for validation
     train_size = len(dataset) - val_size                                # 80% for training
     train_ds, val_ds = random_split(dataset, [train_size, val_size])
 
     # DataLoader
-    train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True)
-    val_loader   = DataLoader(val_ds, batch_size=batch_size, shuffle=False)
+    train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, drop_last=True)
+    val_loader   = DataLoader(val_ds, batch_size=batch_size, shuffle=False, drop_last=True)
 
     # Model
     model =      PointNetPlusPlus(num_classes=2).to(device)      # 2 classes: table or no table
@@ -152,5 +153,5 @@ def train_pointnet_classifier(
     print(f"Training complete. Best Val Acc: {best_acc:.2%}")
 
 if __name__ == "__main__":
-    train_pointnet_classifier(data_dir="data/pointclouds")
+    train_pointnet_classifier(data_dir="data/pointclouds/train")
 

@@ -47,7 +47,11 @@ class PointNetPlusPlus(nn.Module):
         x = x.permute(0, 2, 1)  # [B, 3, N]
         xyz, points = self.sa1(x, None)
         _, points = self.sa2(xyz, points)
-        x = torch.max(points, 2)[0]  # [B, D]
+
+        # points: [B, D, 1, 1] -> flatten to [B, D]
+        x = points.squeeze(-1).squeeze(-1)  # or x = torch.flatten(points, 1)
+
+        # x = torch.max(points, 2)[0]  # [B, D]
         x = F.relu(self.bn1(self.fc1(x)))
         x = self.drop1(x)
         x = self.fc2(x)

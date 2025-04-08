@@ -1,0 +1,5 @@
+Averaged Depth Evaluation Metrics (all Harvard folders):
+AbsRel: 0.2143
+RMSE: 4.9741
+MAE: 3.0685
+Log10: 0.0700
