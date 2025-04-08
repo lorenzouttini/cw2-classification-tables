@@ -25,7 +25,7 @@ def plot_training_curves(train_vals, val_vals, ylabel, title, filename, batch_si
 
 def train_pointnet_classifier(
     data_dir,
-    batch_size=64,
+    batch_size=16,
     epochs=50,
     lr=1e-3,
     num_points=1024,

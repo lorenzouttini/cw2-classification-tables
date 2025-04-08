@@ -48,7 +48,6 @@ BLACKLIST = {
 }
 
 
-
 # ========== Main ==========
 
 def process_scene(scene_path, output_dir, max_frames=100):

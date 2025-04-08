@@ -87,6 +87,7 @@ def check_dataset_balance(data_dir):
     print(f"Class 0 ratio: {count.get(0, 0) / total:.2%}")
     print(f"Class 1 ratio: {count.get(1, 0) / total:.2%}")
 
+
 ### ----------- VISUALIZE POINTCLOUDS ----------- ###
 
 def inspect_sample(npy_path, scenes_root="data"):
@@ -159,7 +160,7 @@ def inspect_sample(npy_path, scenes_root="data"):
             ax2.set_title("No Points in Polygon")
             ax2.set_axis_off()
     else:
-        print("⚠️ No polygons in this sample.")
+        print(" No polygons in this sample.")
 
     
 
