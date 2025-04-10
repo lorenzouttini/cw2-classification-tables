@@ -1,4 +1,4 @@
-# COMP0248 Group D: 3D Point Cloud Table Detection and Segmentation
+# 3D Point Cloud Table Detection and Segmentation
 
 This repository contains implementations of three complementary pipelines for detecting and segmenting tables in indoor scenes:
 
