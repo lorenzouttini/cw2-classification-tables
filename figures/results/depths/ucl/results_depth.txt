@@ -1,5 +1,0 @@
-Averaged Depth Evaluation Metrics (all Harvard folders):
-AbsRel: nan
-RMSE: nan
-MAE: nan
-Log10: nan

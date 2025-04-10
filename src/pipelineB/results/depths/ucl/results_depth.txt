@@ -1,0 +1,5 @@
+Averaged Depth Evaluation Metrics (all ucl folders):
+AbsRel: 0.2255
+RMSE: 0.0362
+MAE: 0.0235
+Log10: 0.0814

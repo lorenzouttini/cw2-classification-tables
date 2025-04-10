@@ -1,0 +1,16 @@
+Total images processed: 10
+Average table points: 100.00%
+Min table points: 100.00%
+Max table points: 100.00%
+
+Per-image statistics:
+frame_006.png: 100.00%
+frame_012.png: 100.00%
+frame_018.png: 100.00%
+frame_024.png: 100.00%
+frame_030.png: 100.00%
+frame_036.png: 100.00%
+frame_042.png: 100.00%
+frame_048.png: 100.00%
+frame_054.png: 100.00%
+frame_060.png: 100.00%

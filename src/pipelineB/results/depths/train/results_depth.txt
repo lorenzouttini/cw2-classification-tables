@@ -1,0 +1,5 @@
+Averaged Depth Evaluation Metrics (all mit folders):
+AbsRel: 0.1380
+RMSE: 0.4387
+MAE: 0.2581
+Log10: 0.0508
